@@ -1,7 +1,7 @@
 # Welcome to Your Lovable Project
 
 ## Project Information
-**URL:** [Lovable Project](https://lovable.dev/projects/d6a89ec5-9d67-418d-995e-22c7aae923f2)
+**URL:** [LipaPro](https://lovable.dev/projects/d6a89ec5-9d67-418d-995e-22c7aae923f2)
 
 ## How to Edit This Code
 
