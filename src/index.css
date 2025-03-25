@@ -1,0 +1,167 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 0 78% 56%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 142 100% 30%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 0 78% 56%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 0 78% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 0 78% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom styles for scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-lipa-gray-medium/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-lipa-gray-medium;
+  }
+}
+
+/* Utility classes */
+@layer components {
+  .glass-panel {
+    @apply bg-white bg-opacity-80 backdrop-blur-sm border border-white/20 shadow-subtle;
+  }
+  
+  .glass-card {
+    @apply rounded-xl p-6 glass-panel transition-all hover:shadow-elevated;
+  }
+
+  .slide-in {
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  .invoice-badge {
+    @apply text-xs px-2.5 py-0.5 rounded-full font-medium inline-flex items-center justify-center;
+  }
+  
+  .invoice-badge-paid {
+    @apply bg-lipa-green-light text-lipa-green;
+  }
+  
+  .invoice-badge-pending {
+    @apply bg-amber-100 text-amber-700;
+  }
+  
+  .invoice-badge-draft {
+    @apply bg-slate-100 text-slate-700;
+  }
+  
+  .invoice-badge-overdue {
+    @apply bg-lipa-red-light text-lipa-red;
+  }
+
+  .kenya-pattern-bg {
+    @apply bg-kenya-pattern bg-opacity-5 animate-wave-pattern bg-size-200;
+  }
+  
+  .kenya-gradient {
+    @apply bg-gradient-to-r from-lipa-red via-lipa-black to-lipa-green;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 400ms;
+}
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Font settings */
+html {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Additional utility */
+.bg-size-200 {
+  background-size: 200% 200%;
+}
