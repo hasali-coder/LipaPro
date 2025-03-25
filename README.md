@@ -1,6 +1,6 @@
 # Welcome to Your Lovable Project
 
-## Project Information
+## Author: A.C. Muange
 **URL:** [LipaPro](https://lovable.dev/projects/d6a89ec5-9d67-418d-995e-22c7aae923f2)
 
 ![image](https://github.com/user-attachments/assets/3768cc71-ffb8-4d1f-8748-de5ee026314a)
