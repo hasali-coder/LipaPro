@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { 
   LayoutDashboard, 
@@ -10,7 +9,8 @@ import {
   LogOut, 
   ChevronLeft, 
   ChevronRight,
-  Plus
+  Plus,
+  FilePlus
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -36,6 +36,7 @@ export const Sidebar = ({
     { icon: FileText, label: 'Invoices', path: '/invoices' },
     { icon: Users, label: 'Clients', path: '/clients' },
     { icon: BarChart3, label: 'Reports', path: '/reports' },
+    { icon: FilePlus, label: 'Quotation/Estimate', path: '/quotation-estimate' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
   

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Plus, ChevronDown } from 'lucide-react';
@@ -15,7 +14,6 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   
-  // Change navbar style on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -43,13 +41,11 @@ export function Navbar() {
       }`}
     >
       <div className="container px-4 mx-auto flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 text-2xl font-semibold">
           <span className="bg-gradient-to-r from-lipa-green to-lipa-red text-white h-8 w-8 rounded-md flex items-center justify-center">LP</span>
           <span className="hidden sm:block">LipaPro</span>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((item) => (
             <Link
@@ -66,7 +62,6 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* Action Buttons */}
         <div className="hidden md:flex items-center space-x-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -93,17 +88,19 @@ export function Navbar() {
                   New Expense
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer hover:bg-lipa-green-light hover:text-lipa-green rounded">
+                <Link to="/new-quote" className="flex items-center w-full py-1">
+                  New Quote
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button
-            className="bg-lipa-red hover:bg-lipa-red/90 text-white transition-all duration-300 font-medium shadow-red-glow"
-          >
+          <Button className="bg-lipa-red hover:bg-lipa-red/90 text-white transition-all duration-300 font-medium shadow-red-glow">
             Get Started
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button 
           className="md:hidden focus:outline-none" 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -111,42 +108,6 @@ export function Navbar() {
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md py-4 px-6 md:hidden animate-fade-in">
-          <div className="flex flex-col space-y-4">
-            {navLinks.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`py-2 ${
-                  isActive(item.path)
-                    ? 'text-lipa-red font-medium'
-                    : 'text-lipa-gray-dark'
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-lipa-gray-light">
-              <Button
-                className="w-full flex items-center justify-center gap-2 mb-3 bg-white text-lipa-green border border-lipa-green hover:bg-lipa-green-light"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Plus size={16} /> Create New
-              </Button>
-              <Button
-                className="w-full bg-lipa-red hover:bg-lipa-red/90 text-white shadow-red-glow"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Get Started
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

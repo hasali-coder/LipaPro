@@ -1,53 +1,104 @@
-
-import { InvoiceCard, InvoiceProps } from './InvoiceCard';
-
-const recentInvoices: InvoiceProps[] = [
-  {
-    id: 'INV-2024-001',
-    client: 'Acme Corp',
-    amount: '$2,450.00',
-    date: 'Mar 1, 2024',
-    dueDate: 'Mar 15, 2024',
-    status: 'pending',
-    delay: 1
-  },
-  {
-    id: 'INV-2024-002',
-    client: 'Tech Solutions Ltd',
-    amount: '$1,850.00',
-    date: 'Feb 28, 2024',
-    dueDate: 'Mar 14, 2024',
-    status: 'paid',
-    delay: 2
-  },
-  {
-    id: 'INV-2024-003',
-    client: 'Global Industries',
-    amount: '$3,200.00',
-    date: 'Feb 25, 2024',
-    dueDate: 'Mar 11, 2024',
-    status: 'overdue',
-    delay: 3
-  },
-  {
-    id: 'INV-2024-004',
-    client: 'Startup Hub Inc',
-    amount: '$950.00',
-    date: 'Feb 23, 2024',
-    dueDate: 'Mar 9, 2024',
-    status: 'draft',
-    delay: 4
-  }
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export function InvoicesList() {
+  const [invoices, setInvoices] = useState([]);
+  const [customerName, setCustomerName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [status, setStatus] = useState("pending");
+  const [loading, setLoading] = useState(false);
+
+  // Fetch invoices from Supabase
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      const { data, error } = await supabase.from("invoices").select("*");
+      if (error) console.error("Error fetching invoices:", error);
+      else setInvoices(data);
+    };
+
+    fetchInvoices();
+  }, []);
+
+  // Handle form submission to create a new invoice
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const { data, error } = await supabase.from("invoices").insert([
+      {
+        customer_name: customerName,
+        amount: parseFloat(amount),
+        status: status,
+      },
+    ]);
+
+    setLoading(false);
+
+    if (error) {
+      console.error("Error creating invoice:", error);
+      alert("Failed to create invoice.");
+    } else {
+      setInvoices([...invoices, ...data]); // Update UI with new invoice
+      setCustomerName("");
+      setAmount("");
+      setStatus("pending");
+    }
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-      {recentInvoices.map((invoice) => (
-        <InvoiceCard key={invoice.id} {...invoice} />
-      ))}
+    <div className="bg-white shadow-md rounded-lg p-4">
+      <h3 className="text-lg font-semibold mb-4">Invoices</h3>
+
+      {/* Invoice Form */}
+      <form onSubmit={handleSubmit} className="mb-4 space-y-3">
+        <input
+          type="text"
+          placeholder="Customer Name"
+          value={customerName}
+          onChange={(e) => setCustomerName(e.target.value)}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-full p-2 border rounded"
+        >
+          <option value="pending">Pending</option>
+          <option value="paid">Paid</option>
+        </select>
+        <button
+          type="submit"
+          className="w-full bg-lipa-green text-white p-2 rounded hover:bg-lipa-green/80"
+          disabled={loading}
+        >
+          {loading ? "Creating..." : "Create Invoice"}
+        </button>
+      </form>
+
+      {/* Invoices List */}
+      <ul>
+        {invoices.length > 0 ? (
+          invoices.map((invoice) => (
+            <li key={invoice.id} className="border-b py-2 flex justify-between">
+              <span className="font-medium">{invoice.customer_name}</span> - ${invoice.amount} - 
+              <span className={`text-sm ${invoice.status === "paid" ? "text-green-500" : "text-red-500"}`}>
+                {invoice.status}
+              </span>
+            </li>
+          ))
+        ) : (
+          <p>No invoices found.</p>
+        )}
+      </ul>
     </div>
   );
 }
-
-export default InvoicesList;
