@@ -3,6 +3,10 @@
 ## Project Information
 **URL:** [LipaPro](https://lovable.dev/projects/d6a89ec5-9d67-418d-995e-22c7aae923f2)
 
+![image](https://github.com/user-attachments/assets/3768cc71-ffb8-4d1f-8748-de5ee026314a)
+
+![image](https://github.com/user-attachments/assets/65cbe83d-1c69-4899-ab44-92fe6c8886bd)
+
 ## How to Edit This Code
 
 ### Option 1: Using Lovable
