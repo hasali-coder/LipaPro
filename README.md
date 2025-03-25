@@ -1,4 +1,4 @@
-# Welcome to Your Lovable Project
+# Welcome to LipaPro Project 🇰🇪
 
 ## Author: A.C. Muange
 **URL:** [LipaPro](https://lovable.dev/projects/d6a89ec5-9d67-418d-995e-22c7aae923f2)
